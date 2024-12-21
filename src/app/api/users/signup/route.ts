@@ -40,7 +40,7 @@ export async function POST(request: NextRequest) {
         console.log(savedUser);
 
         //To send verification email:
-        await sendEmail({ email, emailType: "VERIFY", userId: savedUser.id })
+        await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id })
 
         // To return response:
         return NextResponse.json(
