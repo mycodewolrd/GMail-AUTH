@@ -54,10 +54,10 @@ export default function SignUp() {
 
   return (
     <div className="w-full h-screen flex items-center justify-center flex-col">
-      <h1 className="text-center text-6xl font-bold bg-slate-600 text-white my-4 py-4 px-20 rounded-3xl ">
-        {loading ? "Processing..." : "SignUp"}
+      <h1 className="text-center text-4xl font-bold  text-white my-4 py-4 px-20  ">
+        {loading ? "Processing..." : "SignUp Page"}
       </h1>
-      <label htmlFor="username">Username</label>
+      <label htmlFor="username">Username:</label>
       <input
         id="username"
         className="hover:scale-110 outline-none py-3 px-6 rounded-3xl text-black my-3 "
@@ -67,7 +67,7 @@ export default function SignUp() {
         placeholder="Enter Your Username..."
         required
       />
-      <label htmlFor="email">Email</label>
+      <label htmlFor="email">Email:</label>
       <input
         id="email"
         className=" hover:scale-110 outline-none py-3 px-6 rounded-3xl text-black my-3 "
@@ -88,14 +88,14 @@ export default function SignUp() {
         required
       />
       <button
-        className="my-4 px-6 py-2 bg-slate-400 text-slate-950 rounded-2xl hover:bg-white hover:text-green-600 hover:scale-110 font-bold"
+        className="my-4 px-6 py-2 bg-slate-200 text-slate-950 rounded-2xl hover:bg-white hover:text-orange-600 hover:scale-110 font-bold"
         onClick={onSignUp}
       >
-        {buttonDisabled ? "No SignUp" : "Sign Up"}
+        {buttonDisabled ? "FillUp the form" : "Sign Up"}
       </button>
       <Link
         href="/login"
-        className="my-5 px-8 py-1 rounded-lg hover:scale-105 hover:bg-green-600 bg-green-400 hover:font-semibold text-black"
+        className="my-5 px-8 py-1 rounded-lg hover:scale-105 hover:bg-orange-500 bg-orange-400  text-black"
       >
         Visit to Login Page
       </Link>
