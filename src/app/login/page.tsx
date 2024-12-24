@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import axios from "axios";
 import toast from "react-hot-toast";
+import ToastProvider from "@/app/components/ToastProvider"
+
 
 export default function Login() {
   const router = useRouter();
@@ -38,6 +40,7 @@ export default function Login() {
 
   return (
     <div className="w-full h-screen flex items-center justify-center flex-col">
+      <ToastProvider />
       <h1 className="text-center text-4xl font-bold text-white my-4 py-4 px-20  ">
         {loading ? "Processing" : "Login Page"}
       </h1>
