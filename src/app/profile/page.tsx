@@ -5,6 +5,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import ToastProvider from "@/app/components/ToastProvider";
 
 
 
@@ -15,11 +16,11 @@ export default function ProfilePage() {
   const logout = async () => {
     try {
       await axios.get("/api/users/logout")
-      toast.success("Logged out successfully!")
+      toast.success("Log Out successfully!")
       router.push("/login")
     } catch (error: any) {
       console.log(error.message);
-      toast.error(error.message);
+      toast.error("Something went wrong, Try again!");
     }
   }
 
@@ -32,6 +33,7 @@ export default function ProfilePage() {
 
   return (
     <div className="w-full h-screen flex items-center justify-center flex-col">
+      <ToastProvider />
       <h1 className="text-center text-3xl sm:text-4xl font-bold  text-white my-4 py-4 px-20  ">
         Your Profile Page
       </h1>
