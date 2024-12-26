@@ -7,25 +7,22 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import ToastProvider from "@/app/components/ToastProvider";
 
-
-
-
 export default function ProfilePage() {
-  const router = useRouter()
-  const [data, setData] = useState<string | null>(null)
+  const router = useRouter();
+  const [data, setData] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   // To logout the user
   const logout = async () => {
     try {
-      await axios.get("/api/users/logout")
-      toast.success("Log Out successfully!")
-      router.push("/login")
+      await axios.get("/api/users/logout");
+      toast.success("Log Out successfully!");
+      router.push("/login");
     } catch (error: any) {
       console.log(error.message);
       toast.error("Something went wrong, Try again!");
     }
-  }
+  };
 
   // To fetch user details
   const getUserDetails = async () => {
@@ -34,10 +31,9 @@ export default function ProfilePage() {
       const response = await axios.get("/api/users/loggedUser");
       console.log(response.data);
       setData(response.data.username);
-      toast.success("User details fetched successfully!");
-    } catch (error:any) {
-      console.log(error.message);
-      toast.error("Something went wrong, Try again!");
+    } catch (error: any) {
+      console.error(error.message);
+      toast.error("Failed to fetch user details!");
     } finally {
       setLoading(false);
     }
@@ -46,9 +42,7 @@ export default function ProfilePage() {
   // To fetch user details on page load
   useEffect(() => {
     getUserDetails();
-  } ,[]);
-
-
+  }, []);
 
   return (
     <div className="w-full h-screen flex items-center justify-center flex-col">
@@ -59,12 +53,12 @@ export default function ProfilePage() {
 
       <h2 className="text-2xl font-bold my-4 p-3 border-2 rounded-xl">
         {loading ? (
-              "Fetching your profile..."
-            ) : data ? (
+          "Fetching your profile..."
+        ) : data ? (
           <Link href={`/profile/${data}`}>{data}</Link>
-          ) : (
-              "User data not available. Please fetch details."
-            )}
+        ) : (
+          "can't fetch your profile"
+        )}
       </h2>
       <button
         className="my-4 px-6 py-2 bg-slate-200 text-slate-950 rounded-2xl hover:bg-white hover:text-orange-600 hover:scale-110 font-bold"
