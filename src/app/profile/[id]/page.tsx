@@ -2,14 +2,12 @@
 export default function UserProfilePage({ params }: any) {
   return (
     <div className="w-full h-screen flex items-center justify-center flex-col">
-      <h1 className="text-center text-3xl sm:text-6xl font-bold  text-white my-4 py-4 px-20 rounded-3xl ">
-        User Profile Page
-      </h1>
-      <p className="text-3xl p-6  rounded-xl"> Profile Page
-        <span className="py-3 mx-4 text-black font-bold px-6 bg-orange-500 rounded-md">
-          {params.id}
-        </span>
-      </p>
+      <h3 className="text-3xl p-6  rounded-xl">
+        Hi, welcome to your profile page👋 
+      </h3>
+      <h4 className="py-3 mx-4 text-black font-bold px-6 bg-orange-500 rounded-md">
+        {params.id}
+      </h4>
     </div>
   );
 }

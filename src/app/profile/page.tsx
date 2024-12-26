@@ -2,7 +2,7 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import ToastProvider from "@/app/components/ToastProvider";
@@ -12,7 +12,10 @@ import ToastProvider from "@/app/components/ToastProvider";
 
 export default function ProfilePage() {
   const router = useRouter()
-  const [data, setData] = useState("nothing")
+  const [data, setData] = useState<string | null>(null)
+  const [loading, setLoading] = useState(false);
+
+  // To logout the user
   const logout = async () => {
     try {
       await axios.get("/api/users/logout")
@@ -24,11 +27,27 @@ export default function ProfilePage() {
     }
   }
 
+  // To fetch user details
   const getUserDetails = async () => {
-    const res = await axios.get("/api/users/me")
-    console.log(res.data);
-    setData(res.data.data._id)
-  }
+    try {
+      setLoading(true);
+      const response = await axios.get("/api/users/loggedUser");
+      console.log(response.data);
+      setData(response.data.username);
+      toast.success("User details fetched successfully!");
+    } catch (error:any) {
+      console.log(error.message);
+      toast.error("Something went wrong, Try again!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // To fetch user details on page load
+  useEffect(() => {
+    getUserDetails();
+  } ,[]);
+
 
 
   return (
@@ -39,11 +58,13 @@ export default function ProfilePage() {
       </h1>
 
       <h2 className="text-2xl font-bold my-4 p-3 border-2 rounded-xl">
-        {data === "nothing" ? (
-          "Nothing"
-        ) : (
+        {loading ? (
+              "Fetching your profile..."
+            ) : data ? (
           <Link href={`/profile/${data}`}>{data}</Link>
-        )}
+          ) : (
+              "User data not available. Please fetch details."
+            )}
       </h2>
       <button
         className="my-4 px-6 py-2 bg-slate-200 text-slate-950 rounded-2xl hover:bg-white hover:text-orange-600 hover:scale-110 font-bold"
