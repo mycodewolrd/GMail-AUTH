@@ -30,7 +30,7 @@ export default function ProfilePage() {
       setLoading(true);
       const response = await axios.get("/api/users/loggedUser");
       console.log(response.data);
-      setData(response.data.username);
+      setData(response.data.data.username);
     } catch (error: any) {
       console.error(error.message);
       toast.error("Failed to fetch user details!");
@@ -55,7 +55,16 @@ export default function ProfilePage() {
         {loading ? (
           "Fetching your profile..."
         ) : data ? (
-          <Link href={`/profile/${data}`}>{data}</Link>
+          <>
+            Click here👉
+            <Link
+              className="py-1 mx-2 text-orange-400 font-bold px-3 bg-slate-700 rounded-md"
+              href={`/profile/${data}`}
+            >
+              {data}
+            </Link>
+            to visit your profile
+          </>
         ) : (
           "can't fetch your profile"
         )}
